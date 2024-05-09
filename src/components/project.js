@@ -37,8 +37,7 @@ Object.assign(List.prototype, addProjectToList);
 function InputController() {
   const myLists = new List();
 
-  const createProject = () => {
-    const title = document.querySelector('#title').value;
+  const createProject = (title) => {
     myLists.addProject(new Project(title));
     console.log(myLists.list);
   }
@@ -47,15 +46,11 @@ function InputController() {
   const createTask = (index,name,desc,prio) => {
     getList()[index].addTask(name,desc,prio);
   }
-  const okay = document.querySelector('.okay');
-  okay.addEventListener('click', (e) => {
-    e.preventDefault()
-    createProject();
 
-  })
   return {
     getList,
-    createTask
+    createTask,
+    createProject
   }
 }
 const me = InputController();
