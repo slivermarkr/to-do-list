@@ -6,7 +6,8 @@ class Project {
 }
 const addTaskToProject = {
   addTask(name , desc, prio) {
-    const task = new Task(name,desc,prio);
+    const task = new Task(name,desc);
+    task.getPriorityIndex(prio);
     this.tasks.push(task);
   }
 }
@@ -19,7 +20,7 @@ class Task {
   }
 }
 const getPriorityOfTask = {
-  priorityIndex(index) {
+  getPriorityIndex(index) {
     const indexes = ["Urgent","Immediate","Slight","Not a priority"]
     this.priority = indexes[index]
   }
