@@ -22,21 +22,6 @@ class Task {
 
 Object.assign(Project.prototype,takeTask);
 
-function CreateProject(input) {
-  const project = new Project(input);
-
-  const getProjectTitle = () =>  project.title
-
-  const getProjectTasks = () => project.tasks;
-
-  return {
-    project,
-    getProjectTasks,
-    getProjectTitle
-  }
-}
-
-
 const btn = document.querySelector('.add-title');
 const titleModal = document.querySelector('.title-modal');
 const okay = document.querySelector('.okay');
@@ -47,12 +32,12 @@ btn.addEventListener('click' , (e) => {
 })
 
 function Projects(){
-  const projects = []
+  const listOfProjects = []
 
   const projectInstance = () => {
   const title = document.querySelector('#title').value;
-  const project = CreateProject(title);
-  projects.push(project);
+  const project = new Project(title);
+  listOfProjects.push(project);
   }
   okay.addEventListener('click', (e) => {
     e.preventDefault()
@@ -60,7 +45,7 @@ function Projects(){
     titleModal.style.display = "none";
   })
   return {
-    projects
+    listOfProjects
   }
 }
 const me = Projects()
