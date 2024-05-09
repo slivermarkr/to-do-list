@@ -62,5 +62,32 @@ function InputController() {
     createProject
   }
 }
-const me = InputController()
 
+function ScreenController() {
+  const list = InputController() ;
+
+  const projectInstance = () => {
+    const title = document.querySelector('#title').value;
+    list.createProject(title);
+  }
+
+  const taskInstance = (index) => {
+    const taskName = document.querySelector('#task').value;
+    const description = document.querySelector('#description').value;
+    const priority = document.querySelectorAll('li > button').value - 1;
+    list.createTask(index,taskName,description,priority);
+  }
+
+  const createProjectBtn = document.querySelector('.add-title');
+  const titleModal = document.querySelector('.title-modal');
+  const okayProject = document.querySelector('.okay');
+
+  createProjectBtn.addEventListener('click', () => titleModal.style.display = "block");
+
+  okayProject.addEventListener('click', (e) => {
+    e.preventDefault()
+    projectInstance()
+    titleModal.style.display = "none";
+  })
+}
+ScreenController()
