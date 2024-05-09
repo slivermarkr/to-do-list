@@ -13,12 +13,18 @@ const addTaskToProject = {
 Object.assign(Project.prototype,addTaskToProject);
 
 class Task {
-  constructor(name,description,priority){
+  constructor(name,description){
     this.name = name
     this.description = description
-    this.priority = priority
   }
 }
+const getPriorityOfTask = {
+  priorityIndex(index) {
+    const indexes = ["Urgent","Immediate","Slight","Not a priority"]
+    this.priority = indexes[index]
+  }
+}
+Object.assign(Task.prototype, getPriorityOfTask);
 
 class List {
   constructor() {
@@ -56,3 +62,4 @@ function InputController() {
   }
 }
 const me = InputController()
+
