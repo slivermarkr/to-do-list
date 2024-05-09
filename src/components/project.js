@@ -41,9 +41,11 @@ function InputController() {
     myLists.addProject(new Project(title));
     console.log(myLists.list);
   }
+
   const getList = () => myLists.list
 
   const createTask = (index,name,desc,prio) => {
+    console.log(`Adding "${name}", "${desc}", "${prio}" to Project:"${getList()[index].name}" of index ${index} `);
     getList()[index].addTask(name,desc,prio);
   }
 
@@ -53,4 +55,4 @@ function InputController() {
     createProject
   }
 }
-const me = InputController();
+const me = InputController()
