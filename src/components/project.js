@@ -1,28 +1,39 @@
 class Project {
-  constructor(title) {
-   this.title = title
-   this.array = []
+  constructor(input) {
+    this.title = input
+    this.tasks = []
   }
- }
-class Tasks {
- constructor(name,description,priority) {
-  this.name = name;
-  this.description = description;
-  this.priority = priority
- }
 }
-const getProjectTask = {
-  getTask(name,description,priority) {
-    const newTask = new Tasks(name,description,priority)
-    this.array.push(newTask);
-    console.log(this.array);
+const takeTask = {
+  acceptTask(name , desc, prio) {
+    const task = new Task(name,desc,prio);
+    this.tasks.push(task);
   }
 }
 
-Object.assign(Project.prototype, getProjectTask);
 
-const project = new Project("Today")
-project.getTask("Water the plants","or it'll die","High");
-project.getTask("Water the plants","or it'll die","High");
-project.getTask("Water the plants","or it'll die","High");
-project.getTask("Water the plants","or it'll die","High");
+class Task {
+  constructor(name,description,priority){
+    this.name = name
+    this.description = description
+    this.priority = priority
+  }
+}
+
+Object.assign(Project.prototype,takeTask);
+
+function CreateProject(input = "Today") {
+  const project = new Project(input);
+
+  const getProjectTitle = () =>  project.title
+
+  const getProjectTasks = () => project.tasks;
+
+  return {
+    project,
+    getProjectTasks,
+    getProjectTitle
+  }
+}
+
+const me = CreateProject();
