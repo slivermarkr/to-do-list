@@ -4,13 +4,13 @@ class Project {
     this.tasks = []
   }
 }
-const takeTask = {
-  acceptTask(name , desc, prio) {
+const addTaskToProject = {
+  addTask(name , desc, prio) {
     const task = new Task(name,desc,prio);
     this.tasks.push(task);
   }
 }
-
+Object.assign(Project.prototype,addTaskToProject);
 
 class Task {
   constructor(name,description,priority){
@@ -20,32 +20,37 @@ class Task {
   }
 }
 
-Object.assign(Project.prototype,takeTask);
-
-const btn = document.querySelector('.add-title');
-const titleModal = document.querySelector('.title-modal');
-const okay = document.querySelector('.okay');
-
-btn.addEventListener('click' , (e) => {
-  e.preventDefault();
-  titleModal.style.display = "block";
-})
-
-function Projects(){
-  const listOfProjects = []
-
-  const projectInstance = () => {
-  const title = document.querySelector('#title').value;
-  const project = new Project(title);
-  listOfProjects.push(project);
-  }
-  okay.addEventListener('click', (e) => {
-    e.preventDefault()
-    projectInstance();
-    titleModal.style.display = "none";
-  })
-  return {
-    listOfProjects
+class List {
+  constructor() {
+    this.list = [];
   }
 }
-const me = Projects()
+
+const addProjectToList = {
+  addProject(input) {
+    this.list.push(input);
+  }
+}
+
+Object.assign(List.prototype, addProjectToList);
+
+function InputController() {
+  const myLists = new List();
+
+  const createProject = () => {
+    const title = document.querySelector('#title').value;
+    myLists.addProject(new Project(title));
+    console.log(myLists.list);
+  }
+  const getList = () => myLists.list
+  const okay = document.querySelector('.okay');
+  okay.addEventListener('click', (e) => {
+    e.preventDefault()
+    createProject();
+
+  })
+  return {
+    getList
+  }
+}
+const me = InputController();
