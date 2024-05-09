@@ -1,6 +1,6 @@
 class Project {
   constructor(input) {
-    this.title = input
+    this.name = input
     this.tasks = []
   }
 }
@@ -43,6 +43,10 @@ function InputController() {
     console.log(myLists.list);
   }
   const getList = () => myLists.list
+
+  const createTask = (index,name,desc,prio) => {
+    getList()[index].addTask(name,desc,prio);
+  }
   const okay = document.querySelector('.okay');
   okay.addEventListener('click', (e) => {
     e.preventDefault()
@@ -50,7 +54,8 @@ function InputController() {
 
   })
   return {
-    getList
+    getList,
+    createTask
   }
 }
 const me = InputController();
