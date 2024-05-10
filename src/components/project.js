@@ -74,14 +74,14 @@ function ScreenController() {
     list.createProject(title);
   }
 
-  const taskInstance = (index) => {
-    const taskName = document.querySelector('#task').value;
-    const description = document.querySelector('#description').value;
-    const priority = document.querySelectorAll('li > button').value - 1;
-    list.createTask(index,taskName,description,priority);
-  }
+  // const taskInstance = (index) => {
+  //   const taskName = document.querySelector('#task').value;
+  //   const description = document.querySelector('#description').value;
+  //   const priority = document.querySelectorAll('li > button').value - 1;
+  //   list.createTask(index,taskName,description,priority);
+  // }
   
-  const updateScreen = () => {
+  const updateProjectScreen = () => {
     list.getList().forEach((project, index) => {
       const projectDiv = document.createElement('button');
       projectDiv.classList.add('project');
@@ -91,9 +91,26 @@ function ScreenController() {
     })
   }
 
+  const updateTaskScreen = () => {
+    list.getList().forEach((project => {
+      project.tasks.forEach(task => {
+        console.log(task)
+      })
+    }))
+  }
+
+  const createProjectTask = (e) => {
+    e.preventDefault()
+
+    const dialog = document.querySelector('#dialog');
+    dialog.style.display = "block";
+  }
+
+
   const createProjectBtn = document.querySelector('.add-title');
   const titleModal = document.querySelector('.title-modal');
   const okayProject = document.querySelector('.okay');
+  const addTaskBtn = document.querySelector('#addtask')
 
   createProjectBtn.addEventListener('click', () => titleModal.style.display = "block");
 
@@ -101,9 +118,19 @@ function ScreenController() {
     e.preventDefault()
     navDiv.textContent = ""
     projectInstance()
-    updateScreen();
+    updateProjectScreen();
     titleModal.style.display = "none";
   })
 
+  list.createProject("Today");
+  updateProjectScreen()
+  const projectBtn = document.querySelectorAll('.project');
+  let currentProjectIndex;
+
+  projectBtn.forEach(project => {
+    currentProjectIndex = project.dataset.index
+    project.addEventListener('click',() => console.log(currentProjectIndex));
+  })
+  
 }
 ScreenController()
