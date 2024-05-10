@@ -111,6 +111,7 @@ function ScreenController() {
   const titleModal = document.querySelector('.title-modal');
   const okayProject = document.querySelector('.okay');
   const addTaskBtn = document.querySelector('#addtask')
+  const tasksModal = document.querySelector('#dialog');
 
   createProjectBtn.addEventListener('click', () => titleModal.style.display = "block");
 
@@ -123,14 +124,15 @@ function ScreenController() {
   })
 
   list.createProject("Today");
-  updateProjectScreen()
-  const projectBtn = document.querySelectorAll('.project');
-  let currentProjectIndex;
+  updateProjectScreen();
+  const projectButton = document.querySelectorAll('.project');
 
-  projectBtn.forEach(project => {
-    currentProjectIndex = project.dataset.index
-    project.addEventListener('click',() => console.log(currentProjectIndex));
+  projectButton.forEach(project => {
+    project.addEventListener('click' ,(e) => {
+      const index = e.target.dataset.index;
+      console.log(index);
+      // tasksModal.style.display = "block";
+    })
   })
-  
 }
 ScreenController()
