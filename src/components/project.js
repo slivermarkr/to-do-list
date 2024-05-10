@@ -53,6 +53,7 @@ function InputController() {
 
   const createTask = (index,name,desc,prio) => {
     console.log(`Adding "${name}", "${desc}", "${prio}" to Project:"${getList()[index].name}" of index ${index} `);
+
     getList()[index].addTask(name,desc,prio);
   }
 
@@ -74,13 +75,14 @@ function ScreenController() {
     list.createProject(title);
   }
 
-  // const taskInstance = (index) => {
-  //   const taskName = document.querySelector('#task').value;
-  //   const description = document.querySelector('#description').value;
-  //   const priority = document.querySelectorAll('li > button').value - 1;
-  //   list.createTask(index,taskName,description,priority);
-  // }
+  const taskInstance = (index) => {
+    const taskName = document.querySelector('#task').value;
+    const description = document.querySelector('#description').value;
+    const priority = document.querySelectorAll('li > button').textContent - 1;
+    list.createTask(index,taskName,description,priority);
+  }
   
+
   const updateProjectScreen = () => {
     list.getList().forEach((project, index) => {
       const projectDiv = document.createElement('button');
@@ -99,13 +101,7 @@ function ScreenController() {
     }))
   }
 
-  const createProjectTask = (e) => {
-    e.preventDefault()
-
-    const dialog = document.querySelector('#dialog');
-    dialog.style.display = "block";
-  }
-
+  
 
   const createProjectBtn = document.querySelector('.add-title');
   const titleModal = document.querySelector('.title-modal');
@@ -125,14 +121,18 @@ function ScreenController() {
 
   list.createProject("Today");
   updateProjectScreen();
-  const projectButton = document.querySelectorAll('.project');
 
-  projectButton.forEach(project => {
-    project.addEventListener('click' ,(e) => {
-      const index = e.target.dataset.index;
+  const projectBtn = document.querySelectorAll('.project');
+
+  projectBtn.forEach(project => {
+    window.addEventListener('click' ,(e) => 
+    {
+      if(!e.target.className.contains === "project") return
+      const index = e.target.dataset.index
       console.log(index);
-      // tasksModal.style.display = "block";
-    })
+      console.log("hello");
+    }
+    );
   })
 }
 ScreenController()
