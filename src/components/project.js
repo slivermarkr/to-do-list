@@ -65,6 +65,9 @@ function InputController() {
 
 function ScreenController() {
   const list = InputController() ;
+  const navDiv = document.querySelector('.nav-div');
+
+ 
 
   const projectInstance = () => {
     const title = document.querySelector('#title').value;
@@ -77,6 +80,16 @@ function ScreenController() {
     const priority = document.querySelectorAll('li > button').value - 1;
     list.createTask(index,taskName,description,priority);
   }
+  
+  const updateScreen = () => {
+    list.getList().forEach((project, index) => {
+      const projectDiv = document.createElement('button');
+      projectDiv.classList.add('project');
+      projectDiv.textContent = project.name;
+      projectDiv.dataset.index = index
+      navDiv.appendChild(projectDiv);
+    })
+  }
 
   const createProjectBtn = document.querySelector('.add-title');
   const titleModal = document.querySelector('.title-modal');
@@ -86,8 +99,11 @@ function ScreenController() {
 
   okayProject.addEventListener('click', (e) => {
     e.preventDefault()
+    navDiv.textContent = ""
     projectInstance()
+    updateScreen();
     titleModal.style.display = "none";
   })
+
 }
 ScreenController()
