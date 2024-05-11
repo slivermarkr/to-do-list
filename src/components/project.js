@@ -21,7 +21,7 @@ class Task {
 }
 const getPriorityOfTask = {
   getPriorityIndex(index) {
-    const indexes = ["Urgent","Immediate","Slight","Not a priority"]
+    const indexes = ["Urgent","Immediate","Slightly","Not a priority"]
     this.priority = indexes[index]
   }
 }
@@ -51,10 +51,10 @@ function InputController() {
 
   const getList = () => myLists.list
 
-  const createTask = (index,name,desc,prio) => {
-    console.log(`Adding "${name}", "${desc}", "${prio}" to Project:"${getList()[index].name}" of index ${index} `);
+  const createTask = (index,name,desc) => {
+    console.log(`Adding "${name}", "${desc}" to Project:"${getList()[index].name}" of index ${index} `);
 
-    getList()[index].addTask(name,desc,prio);
+    getList()[index].addTask(name,desc);
   }
 
   return {
@@ -68,8 +68,6 @@ function ScreenController() {
   const list = InputController() ;
   const navDiv = document.querySelector('.nav-div');
 
- 
-
   const projectInstance = () => {
     const title = document.querySelector('#title').value;
     list.createProject(title);
@@ -78,11 +76,18 @@ function ScreenController() {
   const taskInstance = (index) => {
     const taskName = document.querySelector('#task').value;
     const description = document.querySelector('#description').value;
-    const priority = document.querySelectorAll('li > button').textContent - 1;
-    list.createTask(index,taskName,description,priority);
+    const priorityArray = document.querySelectorAll('.prio');
+    priorityArray.forEach(value => {
+      value.addEventListener('click', () => {
+        let priority = value.dataset.value;
+        list.getList()[0].tasks.getPriorityIndex(priority)
+      })
+    })
+    const getPriorityValue = () => priority;
+
+    list.createTask(index,taskName,description);
   }
   
-
   const updateProjectScreen = () => {
     list.getList().forEach((project, index) => {
       const projectDiv = document.createElement('button');
@@ -100,8 +105,6 @@ function ScreenController() {
       })
     }))
   }
-
-  
 
   const createProjectBtn = document.querySelector('.add-title');
   const titleModal = document.querySelector('.title-modal');
@@ -122,17 +125,25 @@ function ScreenController() {
   list.createProject("Today");
   updateProjectScreen();
 
-  const projectBtn = document.querySelectorAll('.project');
+  const projectBtn = document.querySelector('nav');
 
-  projectBtn.forEach(project => {
-    window.addEventListener('click' ,(e) => 
-    {
+  let currentIndex;
+  
+    projectBtn.addEventListener('click' ,(e) => {
       if(!e.target.className.contains === "project") return
-      const index = e.target.dataset.index
-      console.log(index);
-      console.log("hello");
-    }
-    );
+      currentIndex = e.target.dataset.index;
+      tasksModal.style.display = "block";
+    })
+
+  const getCurrentIndex = () => currentIndex;
+
+  addTaskBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    taskInstance(getCurrentIndex());
+    tasksModal.style.display = "none";
   })
+  return {
+    list
+  }
 }
-ScreenController()
+const me = ScreenController()

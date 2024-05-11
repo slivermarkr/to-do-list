@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link rel="stylesheet" href="main.css">
+ <link rel="stylesheet" href="./src/main.css">
  <title>List your To-do Up</title>
 </head>
 <body>
@@ -17,9 +17,9 @@
   <form action="" class="title-modal">
    <label for="title">Title:
     <input id="title" type="text" placeholder="Title"></label>
-    <button class="okay">Okay</button>
+    <button class="create-title">Okay</button>
  </form>
- <div class="nav-div"></div>
+ <div class="project-div"></div>
 </nav>
  <main>
   <div class="content">
@@ -32,8 +32,8 @@
     </label>
      
     <div>
-      <input type="radio" class="prio" id="urgent" name="priority" data-value="0">
-      <label for="urgent">#</label>
+       <label for="urgent">
+       <input type="radio" class="prio" id="urgent" name="priority" data-value="0">#</label>
     </div>
     <div>
        <label for="immediate">
@@ -41,21 +41,18 @@
     </div>
     <div>
        <label for="slightly">
-      <input type="radio" class="prio" id="slightly" name="priority" data-value="2">
-         #</label>
+      <input type="radio" class="prio" id="slightly" name="priority" data-value="2">#</label>
     </div>
     <div>
        <label for="not-priority">
-      <input type="radio" class="prio" id="not-priority" name="priority" data-value="3">
-         #</label>
+      <input type="radio" class="prio" id="not-priority" name="priority" data-value="3">#</label>
     </div>
 
       <button id="addtask">addtask</button>
    </form>
   </div>
  </main>
- <script src="./components/project.js"></script>
- <script src="index.js"></script>
+ <script src="new.js"></script>
 
 </body>
 </html>
