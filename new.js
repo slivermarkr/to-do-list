@@ -64,7 +64,10 @@ const getList = () => {
  const titleModal = document.querySelector('.title-modal');
  const createTitleBtn = document.querySelector('.create-title');
  const projectDiv = document.querySelector('.project-div');
+ const mainContentDiv = document.querySelector('.content');
+ mainContentDiv.textContent = ""
 
+ 
  addProjectBtn.addEventListener('click', () => {
   titleModal.style.display = "block";
  }) 
@@ -74,15 +77,31 @@ const getList = () => {
   const title = document.querySelector('#title').value;
   LIST.addProject(title);
   projectDiv.appendChild(CreateProjectButton(LIST.list))
-  titleModal.style.display = "none";
-  getList();
   taskInstance();
+  getList();
+  titleModal.style.display = "none";
  }) 
  projectDiv.appendChild(CreateProjectButton(LIST.list))
+
 
  const taskInstance = () => {
  const projectsArray = document.querySelectorAll('.project');
  CreateTaskButton(projectsArray);
+
+ projectsArray.forEach(project => {
+  project.addEventListener('click', () => {
+   mainContentDiv.textContent = "";
+   const index = project.dataset.index
+   
+   const taskDiv = document.createElement('div');
+   const createButton = document.createElement('button');
+   createButton.dataset.index = index;
+   createButton.classList.add('add-task-btn');
+   createButton.textContent = "+";
+   taskDiv.appendChild(createButton);
+   mainContentDiv.appendChild(taskDiv);
+  })
+ })
  }
  taskInstance();
  return {
@@ -111,4 +130,5 @@ function CreateTaskButton(projects) {
   })
  } )
 }
+
 const me = InputController();
