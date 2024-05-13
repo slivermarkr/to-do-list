@@ -29,8 +29,17 @@ class Task {
 function InputController() {
  const LIST = new List();
 
+ const getLIST = () => LIST
+
+ const getProjectLIST = () => LIST.PROJECTLIST;
+
+ const printTaskLIST = (index) => {
+  console.log(getProjectLIST()[index].TASKSLIST)
+ };
+
  const addProjectTitle = (title) => {
   LIST.addProject(title);
+  printProjectList();
  }
 
  const printProjectList = () => {
@@ -39,12 +48,15 @@ function InputController() {
 
  const addTaskInfo = (projectIndex,taskName,taskDesc,taskStatus) => {
   LIST.PROJECTLIST[projectIndex].addTask(taskName,taskDesc,taskStatus);
-  printProjectList();
+  printTaskLIST(projectIndex)
  }
 
  return {
-  LIST,
+  getLIST,
+  getProjectLIST,
   addProjectTitle,
   addTaskInfo
  }
 }
+
+const me = InputController();
