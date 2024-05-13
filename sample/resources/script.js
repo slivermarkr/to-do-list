@@ -26,8 +26,12 @@ class Task {
  }
 }
 
-function InputController() {
+function FunctionController() {
  const LIST = new List();
+
+ LIST.addProject('Today')
+ LIST.addProject('Tomorrow')
+ LIST.addProject('Next Week')
 
  const getLIST = () => LIST
 
@@ -37,13 +41,10 @@ function InputController() {
   console.log(getProjectLIST()[index].TASKSLIST)
  };
 
+
  const addProjectTitle = (title) => {
   LIST.addProject(title);
-  printProjectList();
- }
-
- const printProjectList = () => {
-  console.log(LIST.PROJECTLIST)
+  console.log(getProjectLIST());
  }
 
  const addTaskInfo = (projectIndex,taskName,taskDesc,taskStatus) => {
@@ -59,4 +60,28 @@ function InputController() {
  }
 }
 
-const me = InputController();
+function ScreenController() {
+ const LIST = FunctionController();
+
+ const createProjectBtn = document.querySelector('.create-project-btn');
+ const titleModal = document.querySelector('.title-modal');
+ const addProjectBtn = document.querySelector('.create-title');
+
+ const createProject = () => {
+  const title = document.querySelector('#title').value;
+  console.log(title);
+  LIST.getLIST().addProject(title);
+  console.log(LIST.getLIST());
+ }
+
+ createProjectBtn.addEventListener('click',() => {
+  titleModal.style.display = 'block';
+ })
+
+ addProjectBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  createProject()
+  titleModal.style.display = "none";
+ })
+}
+const me = ScreenController();
