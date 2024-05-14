@@ -29,15 +29,16 @@ class Task {
 function FunctionController() {
  const LIST = new List();
 
- LIST.addProject('Today')
- LIST.addProject('Tomorrow')
- LIST.addProject('Next Week')
+ LIST.addProject('Today');
+ LIST.addProject('Tomorrow');
+ LIST.addProject('Next Week');
 
- const getLIST = () => LIST
+const getLIST = () => LIST
 
  const getProjectLIST = () => LIST.PROJECTLIST;
 
  const printTaskLIST = (index) => {
+  console.log(getProjectLIST()[index])
   console.log(getProjectLIST()[index].TASKSLIST)
  };
 
@@ -67,6 +68,7 @@ function ScreenController() {
  const titleModal = document.querySelector('.title-modal');
  const addProjectBtn = document.querySelector('.create-title');
  const projectListDiv = document.querySelector('.side-bar');
+ const taskListDiv = document.querySelector('.project-content-wrapper');
 
  const createProject = () => {
   const title = document.querySelector('#title').value;
@@ -75,7 +77,7 @@ function ScreenController() {
   console.log(LIST.getLIST());
  }
 
- function loopThroughProjects() {
+ function updateProject() {
   LIST.getProjectLIST().forEach((project,index) => {
    const list = document.createElement('li');
    const projectBtn = document.createElement('button');
@@ -96,9 +98,24 @@ function ScreenController() {
   e.preventDefault();
   projectListDiv.textContent = ""
   createProject()
-  loopThroughProjects();
+  updateProject();
   titleModal.style.display = "none";
  })
- loopThroughProjects()
+
+const addTaskBtn = () => { 
+  projectListDiv.addEventListener('click', (e) => {
+  if(!e.target.classList.contains('projects')) return;
+  taskListDiv.textContent = "";
+  const index = e.target.dataset.index
+  const addTaskBtn = document.createElement('button');
+  addTaskBtn.classList.add('add-task-btn');
+  addTaskBtn.dataset.index = index
+  addTaskBtn.textContent = "+";
+  taskListDiv.appendChild(addTaskBtn);
+ })
 }
-const me = ScreenController();
+ //initial update of the screen
+ updateProject()
+ addTaskBtn();
+}
+const init = ScreenController();
