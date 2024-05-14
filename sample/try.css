@@ -25,16 +25,16 @@ body {
 
 }
 
-.priority div:first-child  label {
+.priorities div:first-child  label {
  color: red;
 }
-.priority div:nth-child(2)  label {
+.priorities div:nth-child(2)  label {
  color: yellow;
 }
-.priority div:nth-child(3)  label {
+.priorities div:nth-child(3)  label {
  color: greenyellow;
 }
-.priority div:nth-child(4)  label {
+.priorities div:nth-child(4)  label {
  color: skyblue
 }
 
@@ -44,6 +44,6 @@ body {
 }
 
 .title-modal,
-.task-modal {
+.task {
  display: none;
 }

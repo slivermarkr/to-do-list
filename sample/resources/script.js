@@ -22,7 +22,7 @@ class Task {
  constructor(name,desc,status) {
   this.name = name
   this.desc = desc
-  this.status = status
+  this.priorityLevel = status
  }
 }
 
@@ -63,6 +63,7 @@ const getLIST = () => LIST
 
 function ScreenController() {
  const LIST = FunctionController();
+ let currentIndex;
 
  const createProjectBtn = document.querySelector('.create-project-btn');
  const titleModal = document.querySelector('.title-modal');
@@ -71,7 +72,10 @@ function ScreenController() {
  const projectListDiv = document.querySelector('.side-bar');
  const taskListDiv = document.querySelector('.project-content-wrapper');
  const projectTitleDiv = document.querySelector('.project-title h2');
+
  const addtaskBtn = document.querySelector('add-task-btn');
+
+ const getCurrentIndex = () => currentIndex
 
  const createProject = () => {
   const title = document.querySelector('#title').value;
@@ -104,15 +108,29 @@ function ScreenController() {
     taskListDiv.appendChild(addTaskBtn);
   }
 
+ const createTask = (buttonIndex) => {
+  const taskName = document.querySelector('#task-name').value;
+  const taskDescription = document.querySelector('#task-desc').value;
+  const priorities = document.querySelectorAll('.priority');
+  let priority;
+
+  priorities.forEach(priorityBtn => {
+   if (priorityBtn.checked) priority = priorityBtn.id
+  })
+
+  LIST.addTaskInfo(buttonIndex,taskName,taskDescription,priority);
+ }
+
  createProjectBtn.addEventListener('click',() => {
   titleModal.style.display = 'block';
  })
 
  addProjectBtn.addEventListener('click', (e) => {
   const index = LIST.getProjectLIST().length
+  currentIndex = index
   e.preventDefault();
   projectListDiv.textContent = ""
-  createProject()
+  createProject();
   updateProject();
   taskListDiv.textContent = "";
   createAddTaskButton(index);
@@ -122,6 +140,7 @@ function ScreenController() {
  projectListDiv.addEventListener('click', (e) => {
   if(!e.target.classList.contains('projects')) return;
   const index = e.target.dataset.index
+  currentIndex = index
   projectTitleDiv.textContent = "";
   taskListDiv.textContent = "";
   createAddTaskButton(index);
@@ -130,11 +149,19 @@ function ScreenController() {
  taskListDiv.addEventListener('click' ,(e) => {
   if(!e.target.classList.contains('add-task-btn')) return;
   taskModal.style.display = 'block';
+  taskModal.dataset.index = e.target.dataset.index
   taskListDiv.appendChild(taskModal);
+ })
+ 
+ taskListDiv.addEventListener('click', (e) => {
+  if(!e.target.classList.contains('create-task-btn')) return;
+  e.preventDefault();
+
+  createTask(getCurrentIndex());
  })
 
 //initial update of the screen
 taskListDiv.textContent = "";
 updateProject()
 }
-const init = ScreenController();
+const initialize = ScreenController();
