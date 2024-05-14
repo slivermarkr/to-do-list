@@ -66,9 +66,11 @@ function ScreenController() {
 
  const createProjectBtn = document.querySelector('.create-project-btn');
  const titleModal = document.querySelector('.title-modal');
+ const taskModal = document.querySelector('.task-modal')
  const addProjectBtn = document.querySelector('.create-title');
  const projectListDiv = document.querySelector('.side-bar');
  const taskListDiv = document.querySelector('.project-content-wrapper');
+ const projectTitleDiv = document.querySelector('.project-title h2');
  const addtaskBtn = document.querySelector('add-task-btn');
 
  const createProject = () => {
@@ -91,13 +93,14 @@ function ScreenController() {
   })
  }
  
- const showTaskOnScreen = (index) => { 
+ const createAddTaskButton = (index) => { 
     const project = LIST.getProjectLIST()[index];
     const addTaskBtn = document.createElement('button');
     addProjectBtn.id = project.title
     addTaskBtn.classList.add('add-task-btn');
     addTaskBtn.dataset.index = index
     addTaskBtn.textContent = "+";
+    projectTitleDiv.textContent = project.title
     taskListDiv.appendChild(addTaskBtn);
   }
 
@@ -106,19 +109,29 @@ function ScreenController() {
  })
 
  addProjectBtn.addEventListener('click', (e) => {
+  const index = LIST.getProjectLIST().length
   e.preventDefault();
   projectListDiv.textContent = ""
   createProject()
   updateProject();
+  taskListDiv.textContent = "";
+  createAddTaskButton(index);
   titleModal.style.display = "none";
  })
 
  projectListDiv.addEventListener('click', (e) => {
+  if(!e.target.classList.contains('projects')) return;
   const index = e.target.dataset.index
+  projectTitleDiv.textContent = "";
   taskListDiv.textContent = "";
-  showTaskOnScreen(index);
+  createAddTaskButton(index);
  })
 
+ taskListDiv.addEventListener('click' ,(e) => {
+  if(!e.target.classList.contains('add-task-btn')) return;
+  taskModal.style.display = 'block';
+  taskListDiv.appendChild(taskModal);
+ })
 
 //initial update of the screen
 taskListDiv.textContent = "";
