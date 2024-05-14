@@ -66,6 +66,7 @@ function ScreenController() {
  const createProjectBtn = document.querySelector('.create-project-btn');
  const titleModal = document.querySelector('.title-modal');
  const addProjectBtn = document.querySelector('.create-title');
+ const projectListDiv = document.querySelector('.side-bar');
 
  const createProject = () => {
   const title = document.querySelector('#title').value;
@@ -74,14 +75,30 @@ function ScreenController() {
   console.log(LIST.getLIST());
  }
 
+ function loopThroughProjects() {
+  LIST.getProjectLIST().forEach((project,index) => {
+   const list = document.createElement('li');
+   const projectBtn = document.createElement('button');
+   projectBtn.classList.add("projects");
+   projectBtn.dataset.index = index;
+   projectBtn.textContent = project.title
+   list.appendChild(projectBtn);
+   projectListDiv.appendChild(list);
+   return projectListDiv;
+  })
+ }
+
  createProjectBtn.addEventListener('click',() => {
   titleModal.style.display = 'block';
  })
 
  addProjectBtn.addEventListener('click', (e) => {
   e.preventDefault();
+  projectListDiv.textContent = ""
   createProject()
+  loopThroughProjects();
   titleModal.style.display = "none";
  })
+ loopThroughProjects()
 }
 const me = ScreenController();
