@@ -69,6 +69,7 @@ function ScreenController() {
  const addProjectBtn = document.querySelector('.create-title');
  const projectListDiv = document.querySelector('.side-bar');
  const taskListDiv = document.querySelector('.project-content-wrapper');
+ const addtaskBtn = document.querySelector('add-task-btn');
 
  const createProject = () => {
   const title = document.querySelector('#title').value;
@@ -77,7 +78,7 @@ function ScreenController() {
   console.log(LIST.getLIST());
  }
 
- function updateProject() {
+ const updateProject = ()  => {
   LIST.getProjectLIST().forEach((project,index) => {
    const list = document.createElement('li');
    const projectBtn = document.createElement('button');
@@ -89,6 +90,16 @@ function ScreenController() {
    return projectListDiv;
   })
  }
+ 
+ const showTaskOnScreen = (index) => { 
+    const project = LIST.getProjectLIST()[index];
+    const addTaskBtn = document.createElement('button');
+    addProjectBtn.id = project.title
+    addTaskBtn.classList.add('add-task-btn');
+    addTaskBtn.dataset.index = index
+    addTaskBtn.textContent = "+";
+    taskListDiv.appendChild(addTaskBtn);
+  }
 
  createProjectBtn.addEventListener('click',() => {
   titleModal.style.display = 'block';
@@ -102,20 +113,15 @@ function ScreenController() {
   titleModal.style.display = "none";
  })
 
-const addTaskBtn = () => { 
-  projectListDiv.addEventListener('click', (e) => {
-  if(!e.target.classList.contains('projects')) return;
-  taskListDiv.textContent = "";
+ projectListDiv.addEventListener('click', (e) => {
   const index = e.target.dataset.index
-  const addTaskBtn = document.createElement('button');
-  addTaskBtn.classList.add('add-task-btn');
-  addTaskBtn.dataset.index = index
-  addTaskBtn.textContent = "+";
-  taskListDiv.appendChild(addTaskBtn);
+  taskListDiv.textContent = "";
+  showTaskOnScreen(index);
  })
-}
- //initial update of the screen
- updateProject()
- addTaskBtn();
+
+
+//initial update of the screen
+taskListDiv.textContent = "";
+updateProject()
 }
 const init = ScreenController();
