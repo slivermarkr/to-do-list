@@ -156,8 +156,8 @@ function ScreenController() {
  taskListDiv.addEventListener('click', (e) => {
   if(!e.target.classList.contains('create-task-btn')) return;
   e.preventDefault();
-
   createTask(getCurrentIndex());
+  taskModal.style.display = 'none';
  })
 
 //initial update of the screen

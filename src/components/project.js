@@ -112,6 +112,7 @@ function ScreenController() {
   const addTaskBtn = document.querySelector('#addtask')
   const tasksModal = document.querySelector('#dialog');
 
+
   createProjectBtn.addEventListener('click', () => titleModal.style.display = "block");
 
   okayProject.addEventListener('click', (e) => {
@@ -142,6 +143,11 @@ function ScreenController() {
     taskInstance(getCurrentIndex());
     tasksModal.style.display = "none";
   })
+  taskButton.addEventListener('click', () => {
+    console.log('Hello');
+  })
+
+
   return {
     list
   }

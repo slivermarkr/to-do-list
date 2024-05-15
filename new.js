@@ -65,6 +65,9 @@ const getList = () => {
  const createTitleBtn = document.querySelector('.create-title');
  const projectDiv = document.querySelector('.project-div');
  const mainContentDiv = document.querySelector('.content');
+
+ const taskButton = document.querySelector('.add-task-btn');
+
  mainContentDiv.textContent = ""
 
  
@@ -77,16 +80,15 @@ const getList = () => {
   const title = document.querySelector('#title').value;
   LIST.addProject(title);
   projectDiv.appendChild(CreateProjectButton(LIST.list))
-  taskInstance();
+  buttonInstance();
   getList();
   titleModal.style.display = "none";
  }) 
  projectDiv.appendChild(CreateProjectButton(LIST.list))
 
 
- const taskInstance = () => {
+ const buttonInstance = () => {
  const projectsArray = document.querySelectorAll('.project');
- CreateTaskButton(projectsArray);
 
  projectsArray.forEach(project => {
   project.addEventListener('click', () => {
@@ -100,10 +102,12 @@ const getList = () => {
    createButton.textContent = "+";
    taskDiv.appendChild(createButton);
    mainContentDiv.appendChild(taskDiv);
-  })
- })
- }
- taskInstance();
+  });
+ });
+}
+ 
+ buttonInstance();
+ 
  return {
   getList
  }
@@ -123,12 +127,6 @@ function CreateProjectButton(listOfProjects) {
  return projectWrapper
 }
 
-function CreateTaskButton(projects) {
- projects.forEach(project => {
-  project.addEventListener('click',() => {
-   console.log(project.dataset.index);
-  })
- } )
-}
+
 
 const me = InputController();
