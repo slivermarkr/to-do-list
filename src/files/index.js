@@ -24,7 +24,7 @@ class Task {
   this.name = name
   this.description = desc
   this.priorityLevel = priorityLevel
-  this.deadLine = date
+  this.date = date
  }
 }
 
@@ -53,7 +53,7 @@ function SetController() {
   printProjectLIST();
  }
 
- const createtaskInstance = (index,name,desc,priority,date) => {
+ const createTaskInstance = (index,name,desc,priority,date) => {
   LIST.PROJECTLIST[index].addTask(name,desc,priority,date);
   printTaskLIST(index);
  }
@@ -62,7 +62,7 @@ function SetController() {
   getLIST,
   getProjectLIST,
   createProjectInstance,
-  createtaskInstance,
+  createTaskInstance,
  }
 }
 
@@ -71,6 +71,14 @@ function ScreenController() {
  let currrentIndex = 0;
 
  const getCurrentIndex = () => currrentIndex;
+
+ const getCurrentDate = () => {
+  const date = new Date();
+  const day = date.getDate();
+  const mont = date.getMonth();
+  const year = date.getFullYear()
+  return `${mont}/${day}/${year}`
+ }
 
  const addProjectToLIST = () => {
   const title = document.querySelector('#title').value;
@@ -86,7 +94,7 @@ function ScreenController() {
    projectBtn.textContent = project.title
    list.appendChild(projectBtn);
    projectListDiv.appendChild(list);
-   return projectListDiv;
+   return projectListDiv;getHour
   })
  }
 
@@ -101,12 +109,26 @@ function ScreenController() {
   taskListDiv.appendChild(addTaskBtn);
 }
 
+const addTaskToProject = (projectIndex) => {
+  const taskName = document.querySelector('#task-name').value;
+  const taskDescription = document.querySelector('#task-desc').value;
+  const priorities = document.querySelectorAll('.priorityLevel');
+  let priorityLevel;
+
+  priorities.forEach(priorityBtn => {
+    if(priorityBtn.checked) priorityLevel = priorityBtn.id
+  })
+
+  LIST.createTaskInstance(projectIndex,taskName,taskDescription,priorityLevel,getCurrentDate())
+}
+
  const addProjectBtn = document.querySelector('.create-project-btn');
  const projectModal = document.querySelector('.title-modal');
  const createProjectBtn = document.querySelector('.create-title');
  const projectListDiv = document.querySelector('.side-bar');
  const projectTitleDiv = document.querySelector('.project-title h2');
  const taskListDiv = document.querySelector('.project-content-wrapper');
+ const taskModal = document.querySelector('.task-modal');
 
 
 addProjectBtn.addEventListener('click' ,() => {
@@ -115,9 +137,13 @@ addProjectBtn.addEventListener('click' ,() => {
 
 createProjectBtn.addEventListener('click',(e) => {
  e.preventDefault()
+ const index = LIST.getProjectLIST().length
+ currrentIndex = index
  projectListDiv.textContent = ""
  addProjectToLIST();
  updateProjectScreen()
+ taskListDiv.textContent = ""
+ createAddTaskButton(getCurrentIndex());
  projectModal.style.display = 'none'
 })
 
@@ -129,7 +155,18 @@ projectListDiv.addEventListener('click', (e) => {
  createAddTaskButton(getCurrentIndex());
 })
 
+taskListDiv.addEventListener('click',(e) => {
+ if(!e.target.classList.contains('add-task-btn')) return;
+ taskModal.style.display = 'block';
+ taskListDiv.appendChild(taskModal);
+})
 
+taskListDiv.addEventListener('click',(e) => {
+ if(!e.target.classList.contains('create-task-btn')) return;
+ e.preventDefault()
+ addTaskToProject(getCurrentIndex());
+ taskModal.style.display = 'none';
+})
 updateProjectScreen()
 }
 

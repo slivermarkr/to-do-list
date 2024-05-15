@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>To-do List App</title>
+ <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+  <div class="content-wrapper">
+    <div class="left-side-div">
+      <h1 class="app-title">To-do List App</h1>
+      <nav>
+        <button class="create-project-btn">Add Project</button>
+        <!-- form for project modal -->
+        <form action="" class="title-modal">
+          <label for="title">Title:
+            <input id="title" type="text" placeholder="Title"></label>
+            <button class="create-title">Okay</button>
+          </form>
+          <ul class="side-bar">
+            
+          </ul>
+      </nav>
+    </div>
+    <div class="right-side-div">
+      <div class="project-title">
+        <h2></h2>
+      </div>
+      <main>
+        <div class="project-content-wrapper">
+          <!-- task modal -->
+          <form action="" class="task-modal">
+            <fieldset>Add Task</fieldset>
+            <div>
+              <label for="task-name"><input type="text" id="task-name" placeholder="Task Name"></label>
+            </div>
+            <div>
+              <label for="task-desc"><input type="text" id="task-desc" placeholder="Add Description"></label>
+            </div>
+            <div class="priorities">
+              <div>
+                <label for="urgent"><input type="radio" class="priorityLevel" name="priorityLevel" id="urgent">#</label>
+              </div>
+              <div>
+                <label for="urgent"><input type="radio" class="priorityLevel" name="priorityLevel" id="sooner">#</label>
+              </div>
+              <div>
+                <label for="urgent"><input type="radio" class="priorityLevel" name="priorityLevel" id="slight">#</label>
+              </div>
+              <div>
+                <label for="urgent"><input type="radio" class="priorityLevel" name="priorityLevel" id="not-priority">#</label>
+              </div>
+              <button class="create-task-btn">Add Task</button>
+            </div>
+          </form>
+          <ul></ul>
+        </div>
+      </main>
+    </div>
+
+
+   </div>
+ <script src="index.js"></script>
+</body>
+</html>
