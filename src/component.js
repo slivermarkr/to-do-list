@@ -1,3 +1,11 @@
-export default function sayHello() {
- console.log("Hello");
+
+
+export default class List {
+ constructor() {
+  this.PROJECTLIST = [];
+ }
+ addProject(title) {
+  this.PROJECTLIST.push(title);
+ }
 }
+
