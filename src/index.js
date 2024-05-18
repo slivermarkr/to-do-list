@@ -1,3 +1,6 @@
+import sayHello from './component.js';
+import './styles/main.scss';
+
 class List {
  constructor() {
   this.PROJECTLIST = []

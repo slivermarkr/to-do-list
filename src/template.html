@@ -4,12 +4,11 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>To-do List App</title>
- <link rel="stylesheet" href="./main.css">
 </head>
 <body>
   <div class="content-wrapper">
     <div class="left-side-div">
-      <h1 class="app-title">To-do List App</h1>
+      <h1 class="app-title"><%=htmlWebpackPlugin.options.title %>></h1>
       <nav>
         <button class="create-project-btn">Add Project</button>
         <!-- form for project modal -->
@@ -62,6 +61,5 @@
 
 
    </div>
- <script src="index.js"></script>
 </body>
 </html>
