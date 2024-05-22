@@ -1,14 +1,10 @@
 import SetupController from './components/setup'
 
 
-
-function sayHi() {
- console.log('Hello there')
-}
-
 function InputController() {
  const LIST = SetupController();
  
+ const listOfProjects = LIST.getListOfProject()
  LIST.loadFromLocalStorage()
 
  let currentIndex;
@@ -27,14 +23,29 @@ function InputController() {
  }
  }
 
+ const printProjectsOnScreen = () => {
+  projectListDiv.textContent = ""
+  listOfProjects.forEach((project,index) => {
+   const projectAsList = document.createElement('li');
+   projectAsList.dataset.index = index
+   projectAsList.classList.add('project');
+   projectAsList.textContent = project.title;
+   projectAsList.onclick = () => {
+    currentIndex = index
+    console.log(getCurrentIndex())
+   }
+   projectListDiv.appendChild(projectAsList);
+  }) 
+ }
+
  const addProject = document.querySelector('#addProject');
  const titleDialog = document.querySelector('#titleDialog');
  const title = document.querySelector('#title');
  const addTitle = document.querySelector('#confirmTitle');
- const projectListDiv =  document.querySelector('.projects-list ul');
+ const projectListDiv =  document.querySelector('.project-list');
  const lists = document.querySelectorAll('.projects-list ul li');
- 
- projectListDiv.textContent = ""
+
+ //project side of things
 
  addProject.onclick = () => {
   titleDialog.showModal()
@@ -47,13 +58,17 @@ function InputController() {
  
  titleDialog.addEventListener('close', (e) => {
   getProjectTitle(titleDialog.returnValue);
-
+  printProjectsOnScreen()
  });
+
  addTitle.addEventListener('click', (e) => {
   e.preventDefault();
   titleDialog.close(title.value);
  })
-
+ 
+ 
  createDefaultProject()
+ printProjectsOnScreen()
+
 }
 const me = InputController()

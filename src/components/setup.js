@@ -18,7 +18,7 @@ export default function SetupList() {
  }
 
  const loadFromLocalStorage = () => {
-  const projectInStrings= localStorage.getItem('projects');
+  const projectInStrings = localStorage.getItem('projects');
 
   if(projectInStrings) {
    const parsedProjects = JSON.parse(projectInStrings);
