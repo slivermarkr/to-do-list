@@ -1,0 +1,29 @@
+body{
+ margin: 0 auto;
+ padding: 0;
+ width: 100vw;
+ height: 100dvh;
+ display: grid;
+ grid-template-rows: .2fr 5fr;
+}
+.header-cont {
+ background: #000;
+ color: white;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding: 0 1rem;
+}
+.header-cont h1{
+ color: white;
+}
+.content-wrapper {
+ display: grid;
+ grid-template-columns: 1fr 5fr;
+}
+.sidebar-cont {
+ background: #b69dbc;
+}
+.right-cont {
+ background-color: #efe0e0;
+}
