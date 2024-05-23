@@ -1,5 +1,6 @@
 import SetupController from './components/setup'
 import './styles/main.scss'
+import { format, parseISO, addDays, subDays, differenceInDays, formatDistance } from 'date-fns';
 
 function InputController() {
  const LIST = SetupController();
@@ -43,6 +44,11 @@ function InputController() {
   titleDiv.textContent = projectTitle
  }
 
+ const updateTime = () => {
+  const now = new Date();
+  document.querySelector('.currentDateTime').textContent = format(now, 'PPpp');
+ }
+
  const addProject = document.querySelector('#addProject');
  const titleDialog = document.querySelector('#titleDialog');
  const title = document.querySelector('#title');
@@ -81,6 +87,7 @@ function InputController() {
  
  createDefaultProject()
  printProjectsOnScreen()
-
+ setInterval(updateTime,1000);
+ updateTime()
 }
 const me = InputController()
