@@ -1,5 +1,5 @@
 import SetupController from './components/setup'
-
+import './styles/main.scss'
 
 function InputController() {
  const LIST = SetupController();
@@ -32,17 +32,24 @@ function InputController() {
    projectAsList.textContent = project.title;
    projectAsList.onclick = () => {
     currentIndex = index
+    showMainDivContent(project.title)
     console.log(getCurrentIndex())
    }
    projectListDiv.appendChild(projectAsList);
   }) 
  }
 
+ const showMainDivContent = (projectTitle) => {
+  titleDiv.textContent = projectTitle
+ }
+
  const addProject = document.querySelector('#addProject');
  const titleDialog = document.querySelector('#titleDialog');
  const title = document.querySelector('#title');
  const addTitle = document.querySelector('#confirmTitle');
+ const cancelTitle = document.querySelector('#cancelTitle');
  const projectListDiv =  document.querySelector('.project-list');
+ const titleDiv = document.querySelector('.titleDiv h2');
  const lists = document.querySelectorAll('.projects-list ul li');
 
  //project side of things
@@ -57,15 +64,20 @@ function InputController() {
  })
  
  titleDialog.addEventListener('close', (e) => {
+  if(titleDialog.returnValue) {
   getProjectTitle(titleDialog.returnValue);
   printProjectsOnScreen()
+ }
  });
 
  addTitle.addEventListener('click', (e) => {
   e.preventDefault();
   titleDialog.close(title.value);
  })
- 
+ cancelTitle.addEventListener('click',(e) => {
+  e.preventDefault()
+  titleDialog.close()
+ }) 
  
  createDefaultProject()
  printProjectsOnScreen()

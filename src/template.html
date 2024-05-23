@@ -4,28 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= htmlWebpackPlugin.options.title%></title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
     <dialog id="titleDialog">
-        <form action="">
+        <form action="" class="titleForm">
             <p>
                 <label for="title">Project Title:<input id="title" type="text" placeholder="Project Title"></label>
             </p>
             <div>
-                <button formmethod="dialog" id="confirmTitle" value="default">Okay</button>
+                <button formmethod="dialog" id="cancelTitle" value="Project">Cancel</button>
+                <button formmethod="dialog" id="confirmTitle" value="Project">Okay</button>
             </div>
         </form>
     </dialog>
+    <!-- delete a project dialog -->
+    <dialog>
+        <form action="" class="deletePrjForm">
+            <p>Are you sure you want to delete this Project?</p>
+            <button class="prj-delete-yes">Yes</button>
+            <button class="prj-delete-no">No</button>
+        </form>
+    </dialog>
     <div class="header-cont">
-        <header><h1>Welcome back!</h1></header>
+        <header><h1>Todo List App</h1></header>
+        <div class="currentDateTime">Example date</div>
     </div>
-    <div class="sidebar-cont">
-        <h2>Todo List App</h2>
-        <button id="addProject">Add Project</button>
-        <div class="projectsListDiv">
-            <ul class="project-list">
-                <li>Hello</li>
-            </ul>
+    <div class="content-wrapper">
+        <div class="sidebar-cont">
+            <h2>Todos</h2>
+            <button id="addProject">Add Project</button>
+            <div class="projectsListDiv">
+                <ul class="project-list">
+                    <li>Hello</li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-cont">
+            <div class="upperMain">
+                <div class="titleDiv"><h2>Title goes here</h2></div>
+            </div>
+            <main>
+        
+            </main>
         </div>
     </div>
 </body>

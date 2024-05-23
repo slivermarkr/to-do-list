@@ -5,6 +5,7 @@ body{
  height: 100dvh;
  display: grid;
  grid-template-rows: .2fr 5fr;
+ font-family: 'Roboto', sans-serif;
 }
 .header-cont {
  background: #000;
@@ -23,7 +24,93 @@ body{
 }
 .sidebar-cont {
  background: #b69dbc;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+.sidebar-cont #addProject{
+ font-size: large;
+ padding: .3em 3em;
+}
+.sidebar-cont .project{
+ list-style-type: none;
+ border: 1px solid black;
+ text-align: center;
+ margin: 1rem ;
+ padding: .5rem 2.5rem;
+ font-size: 16px;
+ letter-spacing: 4px;
+ font-weight: bold;
+}
+.sidebar-cont .project:hover{
+ border: 1px solid black;
+ color: antiquewhite;
+ background: #8d5656;
+ font-size: 18px;
+ letter-spacing: 4px;
+ cursor: pointer;
+}
+.project-list {
+padding: 0;
+margin: 0 auto;
 }
 .right-cont {
  background-color: #efe0e0;
+ padding: 0 4rem;
+}
+dialog {
+ animation: fade-out 0.7s ease-out;
+}
+
+dialog[open] {
+ animation: fade-in 0.7s ease-out;
+}
+
+dialog[open]::backdrop {
+ animation: backdrop-fade-in 0.7s ease-out forwards;
+}
+
+/* Animation keyframes */
+
+@keyframes fade-in {
+ 0% {
+   opacity: 0;
+   transform: scaleY(0);
+   display: none;
+ }
+
+ 100% {
+   opacity: 1;
+   transform: scaleY(1);
+   display: block;
+ }
+}
+
+@keyframes fade-out {
+ 0% {
+   opacity: 1;
+   transform: scaleY(1);
+   display: block;
+ }
+
+ 100% {
+   opacity: 0;
+   transform: scaleY(0);
+   display: none;
+ }
+}
+
+@keyframes backdrop-fade-in {
+ 0% {
+   background-color: rgb(0 0 0 / 0%);
+ }
+
+ 100% {
+   background-color: rgb(0 0 0 / 25%);
+ }
+}
+
+body,
+button {
+ font-family: system-ui;
 }
