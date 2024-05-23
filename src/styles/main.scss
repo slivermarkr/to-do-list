@@ -135,12 +135,20 @@ button {
 button:hover {
   background: rgba(255,255,255);
 }
+dialog button:hover {
+  background: rgb(247, 194, 194);
+  color: #2d2c2c;
+}
 .btn-submit {
-  background-color: #4CAF50;
+  background-color: #f7a099;
+  color: white;
+}
+.btn-submit:hover {
+  background-color: rgb(247, 194, 194);
   color: white;
 }
 .btn-cancel {
-  background-color: #f44336;
+  background-color: #f7a099;
   color: white;
   margin-left: 10px;
 }
