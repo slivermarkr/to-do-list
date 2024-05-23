@@ -13,14 +13,14 @@ body{
  display: flex;
  justify-content: space-between;
  align-items: center;
- padding: 0 1rem;
+ padding: 0 2rem;
 }
 .header-cont h1{
  color: white;
 }
 .content-wrapper {
  display: grid;
- grid-template-columns: 1fr 5fr;
+ grid-template-columns: 1.4fr 5fr;
 }
 .sidebar-cont {
  background: #b69dbc;
@@ -34,20 +34,17 @@ body{
 }
 .sidebar-cont .project{
  list-style-type: none;
- border: 1px solid black;
  text-align: center;
  margin: 1rem ;
- padding: .5rem 2.5rem;
+ padding: .5rem 5rem;
  font-size: 16px;
  letter-spacing: 4px;
  font-weight: bold;
 }
 .sidebar-cont .project:hover{
- border: 1px solid black;
  color: antiquewhite;
  background: #8d5656;
- font-size: 18px;
- letter-spacing: 4px;
+ letter-spacing: 6px;
  cursor: pointer;
 }
 .project-list {
@@ -57,6 +54,15 @@ margin: 0 auto;
 .right-cont {
  background-color: #efe0e0;
  padding: 0 4rem;
+ display: grid;
+ grid-template-rows: 1fr 5fr;
+}
+.taskDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
 }
 dialog {
  animation: fade-out 0.7s ease-out;
@@ -112,5 +118,9 @@ dialog[open]::backdrop {
 
 body,
 button {
- font-family: system-ui;
+ font-family: 'Roboto';
+}
+h1 a {
+  text-decoration: none;
+  color: whitesmoke;
 }

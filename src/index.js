@@ -1,6 +1,6 @@
 import SetupController from './components/setup'
 import './styles/main.scss'
-import { format, parseISO, addDays, subDays, differenceInDays, formatDistance } from 'date-fns';
+import { format, parseISO, addDays, subDays, differenceInDays, formatDistance, add } from 'date-fns';
 
 function InputController() {
  const LIST = SetupController();
@@ -10,6 +10,8 @@ function InputController() {
 
  let currentIndex;
  const getCurrentIndex = () => currentIndex;
+
+ const defaultProject = () => listOfProjects[0];
 
  const getProjectTitle = (title) => {
   LIST.createProjectInstance(title)
@@ -33,7 +35,7 @@ function InputController() {
    projectAsList.textContent = project.title;
    projectAsList.onclick = () => {
     currentIndex = index
-    showMainDivContent(project.title)
+    showMainDivContent(project)
     console.log(getCurrentIndex())
    }
    projectListDiv.appendChild(projectAsList);
@@ -41,7 +43,16 @@ function InputController() {
  }
 
  const showMainDivContent = (projectTitle) => {
-  titleDiv.textContent = projectTitle
+  titleDiv.textContent = projectTitle.title
+  taskDiv.textContent = "You have to task here"
+  const addTaskButton = document.createElement('button');
+  addTaskButton.textContent = "Add Task";
+  addTaskButton.classList.add('addTaskBtn');
+  taskDiv.appendChild(addTaskButton)
+  addTaskButton.onclick = () => {
+   console.log(getCurrentIndex());
+   console.log("Hello");
+  }
  }
 
  const updateTime = () => {
@@ -56,6 +67,7 @@ function InputController() {
  const cancelTitle = document.querySelector('#cancelTitle');
  const projectListDiv =  document.querySelector('.project-list');
  const titleDiv = document.querySelector('.titleDiv h2');
+ const taskDiv = document.querySelector('.taskDiv');
  const lists = document.querySelectorAll('.projects-list ul li');
 
  //project side of things
@@ -84,7 +96,7 @@ function InputController() {
   e.preventDefault()
   titleDialog.close()
  }) 
- 
+ showMainDivContent(defaultProject()) 
  createDefaultProject()
  printProjectsOnScreen()
  setInterval(updateTime,1000);
