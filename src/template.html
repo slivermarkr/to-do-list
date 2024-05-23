@@ -26,6 +26,33 @@
             <button class="prj-delete-no">No</button>
         </form>
     </dialog>
+    <!-- dialog for task -->
+    <dialog class="taskDialog">
+        <form method="dialog">
+          <h2>Add New Task</h2>
+          <label for="taskName">Task Name</label>
+          <input type="text" id="taskName" name="taskName" required>
+          
+          <label for="description">Description</label>
+          <textarea id="description" name="description" rows="4" required></textarea>
+          
+          <label>Priority Level</label>
+          <div class="priority-level">
+            <label title="Urgent"><input  type="radio" name="priority" value="Urgent" required> #</label>
+            <label title="High"><input type="radio" name="priority" value="high"> #</label>
+            <label title="Medium"><input type="radio" name="priority" value="medium"> #</label>
+            <label title="Low"><input type="radio" name="priority" value="low"> #</label>
+          </div>
+          
+          <label for="deadline">Deadline</label>
+          <input type="date" id="deadline" name="deadline" required>
+          
+          <div class="button-group">
+            <button class="btn-submit" type="submit">Add Task</button>
+            <button class="btn-cancel" type="button" id="cancelTaskDialog">Cancel</button>
+          </div>
+        </form>
+      </dialog>
     <div class="header-cont">
         <header><h1><a title="Go to my to-do list repo" href="https://github.com/slivermarkr/to-do-list">Todo List App</a></h1></header>
         <div class="currentDateTime">Example date</div>

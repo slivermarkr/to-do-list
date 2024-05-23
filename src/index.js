@@ -36,7 +36,6 @@ function InputController() {
    projectAsList.onclick = () => {
     currentIndex = index
     showMainDivContent(project)
-    console.log(getCurrentIndex())
    }
    projectListDiv.appendChild(projectAsList);
   }) 
@@ -44,17 +43,19 @@ function InputController() {
 
  const showMainDivContent = (projectTitle) => {
   titleDiv.textContent = projectTitle.title
-  taskDiv.textContent = "You have to task here"
+  taskDiv.textContent = "You have no task here"
   const addTaskButton = document.createElement('button');
   addTaskButton.textContent = "Add Task";
   addTaskButton.classList.add('addTaskBtn');
   taskDiv.appendChild(addTaskButton)
   addTaskButton.onclick = () => {
-   console.log(getCurrentIndex());
-   console.log("Hello");
+   showTaskModal()
   }
  }
 
+ const showTaskModal = () => {
+  taskDialog.showModal();
+ }
  const updateTime = () => {
   const now = new Date();
   document.querySelector('.currentDateTime').textContent = format(now, 'PPpp');
@@ -68,6 +69,8 @@ function InputController() {
  const projectListDiv =  document.querySelector('.project-list');
  const titleDiv = document.querySelector('.titleDiv h2');
  const taskDiv = document.querySelector('.taskDiv');
+ const taskDialog = document.querySelector('.taskDialog');
+ const cancelTaskDialog =document.querySelector('#cancelTaskDialog');
  const lists = document.querySelectorAll('.projects-list ul li');
 
  //project side of things
@@ -82,24 +85,30 @@ function InputController() {
  })
  
  titleDialog.addEventListener('close', (e) => {
-  if(titleDialog.returnValue) {
-  getProjectTitle(titleDialog.returnValue);
-  printProjectsOnScreen()
- }
+  if(titleDialog.returnValue !== "") {
+   getProjectTitle(titleDialog.returnValue);
+   printProjectsOnScreen();
+   currentIndex = listOfProjects.length - 1
+   showMainDivContent(listOfProjects[getCurrentIndex()]);
+  }
  });
-
+ 
  addTitle.addEventListener('click', (e) => {
   e.preventDefault();
   titleDialog.close(title.value);
  })
  cancelTitle.addEventListener('click',(e) => {
-  e.preventDefault()
-  titleDialog.close()
+  e.preventDefault();
+  titleDialog.close("");
  }) 
- showMainDivContent(defaultProject()) 
+ cancelTaskDialog.addEventListener('click', (e) => {
+  e.preventDefault();
+  taskDialog.close();
+ })
  createDefaultProject()
  printProjectsOnScreen()
  setInterval(updateTime,1000);
  updateTime()
+ showMainDivContent(defaultProject()) 
 }
 const me = InputController()
