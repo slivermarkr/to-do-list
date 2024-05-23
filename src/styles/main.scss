@@ -13,11 +13,11 @@ button {
 }
 h1 a {
   text-decoration: none;
-  color: whitesmoke;
+  color: rgb(55, 55, 55);
 }
 .header-cont {
- background: #000;
- color: white;
+ background: #cfbbd3;
+ color: rgb(55, 55, 55);
  display: flex;
  justify-content: space-between;
  align-items: center;
@@ -31,7 +31,7 @@ h1 a {
  grid-template-columns: 1.4fr 5fr;
 }
 .sidebar-cont {
- background: #b69dbc;
+ background: #eadeed;
  display: flex;
  flex-direction: column;
  align-items: center;
@@ -51,7 +51,7 @@ h1 a {
 }
 .sidebar-cont .project:hover{
  color: antiquewhite;
- background: #8d5656;
+ background: #cea792;
  letter-spacing: 6px;
  cursor: pointer;
 }
@@ -60,15 +60,15 @@ padding: 0;
 margin: 0 auto;
 }
 .right-cont {
- background-color: #efe0e0;
- padding: 0 4rem;
+  background: #e6d3eb;
+  padding: 0 4rem;
  display: grid;
  grid-template-rows: 1fr 5fr;
 }
 .taskDiv {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   font-size: 2rem;
 }
@@ -136,21 +136,25 @@ button:hover {
   background: rgba(255,255,255);
 }
 dialog button:hover {
-  background: rgb(247, 194, 194);
-  color: #2d2c2c;
+  background: rgb(212, 160, 224);
+  color: #616060;
 }
 .btn-submit {
-  background-color: #f7a099;
+  background: rgb(236, 194, 247);
   color: white;
 }
 .btn-submit:hover {
-  background-color: rgb(247, 194, 194);
-  color: white;
+  background: rgb(214, 149, 233);
+  color: #616060;
 }
 .btn-cancel {
-  background-color: #f7a099;
+  background: rgb(247, 194, 208);
   color: white;
   margin-left: 10px;
+}
+.btn-cancel:hover {
+  background: rgb(234, 158, 178);
+  color: #616060;
 }
 .button-group {
   display: flex;
