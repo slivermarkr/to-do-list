@@ -2,6 +2,7 @@ import SetupController from './components/setup';
 import './styles/main.scss';
 import { format, parseISO } from 'date-fns';
 
+
 function InputController() {
  const LIST = SetupController();
  const listOfProjects = LIST.getListOfProject();
@@ -28,7 +29,7 @@ function InputController() {
  const printProjectsOnScreen = () => {
   projectListDiv.textContent = "";
   listOfProjects.forEach((project, index) => {
-   const projectAsList = document.createElement('li');
+   const projectAsList = document.createElement('button');
    projectAsList.dataset.index = index;
    projectAsList.classList.add('project');
    projectAsList.textContent = project.title;
@@ -63,10 +64,8 @@ function InputController() {
     taskBtnGrp.classList.add("task-btn-grp");
     const editTask =  document.createElement('button');
     editTask.classList.add('edit-task');
-    editTask.textContent = "Edit";
     const deleteTask =  document.createElement('button');
     deleteTask.classList.add('delete-task');
-    deleteTask.textContent = "Delete";
     taskBtnGrp.appendChild(editTask);
     taskBtnGrp.appendChild(deleteTask);
     card.appendChild(taskBtnGrp);
