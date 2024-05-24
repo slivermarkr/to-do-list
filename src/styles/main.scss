@@ -50,7 +50,6 @@ h1 a {
  border-radius: 0;
  box-shadow: none;
  background: #cfbbd3;
- box-shadow: 0 3px 0 rgb(136, 65, 136);
 }
 .sidebar-cont .project:hover{
  color: antiquewhite;
@@ -148,12 +147,12 @@ button {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  box-shadow: 0 5px 0 rgb(177, 176, 176);
+  box-shadow: 0 3px 0 #b6b6b6;
 
 }
 button:active {
   box-shadow: none;
-  transform: translateY(5px);
+  transform: translateY(3px);
 }
 dialog button:hover {
   background: rgb(212, 160, 224);
@@ -184,7 +183,7 @@ dialog button:hover {
   display: grid; 
   grid-template-columns: 1fr 1fr; 
   width: 80%;
-  gap: 1rem;
+  gap: 2rem;
 }
 .taskCard {
   display: grid;  

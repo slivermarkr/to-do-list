@@ -48,9 +48,10 @@ function InputController() {
  const printTasksOnScreen = (project,index) => {
   taskCardDiv.textContent = ""
   if(project.TASKLIST.length !== 0){
-    project.TASKLIST.forEach(task => {
+    project.TASKLIST.forEach((task,taskIndex) => {
     const card = document.createElement('div');
-    card.dataset.index = index
+    card.dataset.index = taskIndex
+    card.dataset.projectIndex = index
     card.classList.add("taskCard");
 
 
@@ -70,6 +71,7 @@ function InputController() {
     taskBtnGrp.appendChild(deleteTask);
     card.appendChild(taskBtnGrp);
     taskCardDiv.appendChild(card);
+    taskCardDiv.style.display = 'grid'
     editTask.onclick = () => {
       console.log("Hello it edit task")
     }
@@ -77,7 +79,10 @@ function InputController() {
       console.log("Hello it delete task")
     }
   })
-} else taskCardDiv.textContent = "You have no task here";
+} else {
+  taskCardDiv.textContent = "You have no task here";
+  taskCardDiv.style.display = 'block'
+}
 
   taskDiv.appendChild(taskCardDiv);
  }
