@@ -33,18 +33,44 @@ function InputController() {
    projectAsList.classList.add('project');
    projectAsList.textContent = project.title;
    projectAsList.onclick = () => {
+    taskDiv.textContent = ""
     currentIndex = index;
     console.log('Project clicked, currentIndex set to:', currentIndex);
     showMainDivContent(project);
+    printTasksOnScreen(project,index);
    };
    projectListDiv.appendChild(projectAsList);
   });
+  printTasksOnScreen(listOfProjects[getCurrentIndex()],getCurrentIndex())
  };
 
+ const printTasksOnScreen = (project,index) => {
+  taskCardDiv.textContent = ""
+  if(project.TASKLIST.length !== 0){
+    project.TASKLIST.forEach(task => {
+    const card = document.createElement('div');
+    card.dataset.index = index
+    card.classList.add("taskCard");
+    card.style.border = "1px solid black"
+    card.style.fontSize = "12px"
+
+    card.innerHTML = `
+    <p>${task.name}</p>
+    <p>${task.description}</p>
+    <p>${task.priorityLevel}</p>
+    <p>${task.deadline}</p>
+    `
+    taskCardDiv.appendChild(card);
+    
+  })
+} else taskCardDiv.textContent = "You have no task here";
+
+  taskDiv.appendChild(taskCardDiv);
+ }
  const showMainDivContent = (project) => {
+  taskDiv.textContent = ''
   if (project) {
     titleDiv.textContent = project.title;
-    taskDiv.textContent = "You have no task here";
     const addTaskButton = document.createElement('button');
     addTaskButton.textContent = "Add Task";
     addTaskButton.classList.add('addTaskBtn');
@@ -74,6 +100,7 @@ function InputController() {
  const projectListDiv = document.querySelector('.project-list');
  const titleDiv = document.querySelector('.titleDiv h2');
  const taskDiv = document.querySelector('.taskDiv');
+ const taskCardDiv = document.querySelector('.taskCardDiv');
  const taskDialog = document.querySelector('.taskDialog');
  const cancelTaskDialog = document.querySelector('#cancelTaskDialog');
  const btnSubmitTask = document.querySelector('.btn-submit');
@@ -115,6 +142,7 @@ function InputController() {
  });
 
  taskDialog.addEventListener('close', (e) => {
+  taskDiv.textContent = ''
   const name = document.querySelector('#taskName').value;
   const description = document.querySelector('#description').value;
   const priorityLevels = document.querySelectorAll('input[name="priority"]');
@@ -141,12 +169,14 @@ function InputController() {
    printProjectsOnScreen();
    showMainDivContent(listOfProjects[getCurrentIndex()]);
   }
+  printProjectsOnScreen(listOfProjects[getCurrentIndex()],getCurrentIndex());
  });
 
  createDefaultProject();
+ showMainDivContent(defaultProject());
  printProjectsOnScreen();
  setInterval(updateTime, 1000);
  updateTime();
- showMainDivContent(defaultProject());
+
 }
 const me = InputController();
