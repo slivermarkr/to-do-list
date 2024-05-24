@@ -51,17 +51,32 @@ function InputController() {
     const card = document.createElement('div');
     card.dataset.index = index
     card.classList.add("taskCard");
-    card.style.border = "1px solid black"
-    card.style.fontSize = "12px"
+
 
     card.innerHTML = `
-    <p>${task.name}</p>
-    <p>${task.description}</p>
-    <p>${task.priorityLevel}</p>
-    <p>${task.deadline}</p>
+    <p class="task-name">${task.name}</p>
+    <p class="task-description">${task.description}</p>
+    <p class="task-priority">${task.priorityLevel}</p>
+    <p class="task-date">${task.deadline}</p>
     `
+    const taskBtnGrp = document.createElement('div')
+    taskBtnGrp.classList.add("task-btn-grp");
+    const editTask =  document.createElement('button');
+    editTask.classList.add('edit-task');
+    editTask.textContent = "Edit";
+    const deleteTask =  document.createElement('button');
+    deleteTask.classList.add('delete-task');
+    deleteTask.textContent = "Delete";
+    taskBtnGrp.appendChild(editTask);
+    taskBtnGrp.appendChild(deleteTask);
+    card.appendChild(taskBtnGrp);
     taskCardDiv.appendChild(card);
-    
+    editTask.onclick = () => {
+      console.log("Hello it edit task")
+    }
+    deleteTask.onclick = () => {
+      console.log("Hello it delete task")
+    }
   })
 } else taskCardDiv.textContent = "You have no task here";
 
@@ -142,7 +157,6 @@ function InputController() {
  });
 
  taskDialog.addEventListener('close', (e) => {
-  taskDiv.textContent = ''
   const name = document.querySelector('#taskName').value;
   const description = document.querySelector('#description').value;
   const priorityLevels = document.querySelectorAll('input[name="priority"]');

@@ -70,7 +70,9 @@ margin: 0 auto;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  gap: 10px;
   font-size: 2rem;
+  text-align: center;
 }
 
 .titleForm div {
@@ -131,9 +133,13 @@ button {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  box-shadow: 0 5px 0 rgb(177, 176, 176);
+  ;
 }
-button:hover {
+button:active {
   background: rgba(255,255,255);
+  box-shadow: none;
+  transform: translateY(5px);
 }
 dialog button:hover {
   background: rgb(212, 160, 224);
@@ -160,7 +166,60 @@ dialog button:hover {
   display: flex;
   justify-content: flex-end;
 }
+.taskCardDiv {
+  display: grid;  
+  width: 80%;
+  gap: 1rem;
+}
+.taskCard {
+  display: grid;  
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto auto auto;
+  gap: 3px;
+  border: 2px solid rgb(239, 192, 239);
+  border-radius: 9px;
+  padding: .5rem;
+  font-size: 18px;
+  color: grey; 
+  align-items: center;
+  position: relative;
+  min-height: 150px;
 
+}
+.task-name {
+  font-size: 23px;
+  font-weight: bold;
+  grid-column:  1/2;
+  grid-row: 1/2;
+  color: black;
+  justify-self: flex-start;
+}
+.task-description{
+  font-size: 18px;
+  color: grey;
+  grid-column: 1/3;
+  grid-row: 2/3;
+  justify-self: flex-start;
+}
+.task-priority {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  text-align: right;
+}
+.task-date {
+  grid-column: 1/3;
+  grid-row: 3/4;
+  text-align: right;
+}
+.task-btn-grp {
+  grid-column: 1/3;
+  grid-row: 4/5;
+  display: flex;
+  justify-content: space-between;
+}
+.edit-task:hover,.delete-task:hover  {
+  opacity: 0.8;
+}
 dialog {
  animation: fade-out 0.7s ease-out;
 }
