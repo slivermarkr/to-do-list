@@ -38,20 +38,20 @@ function InputController() {
     currentIndex = index;
     console.log('Project clicked, currentIndex set to:', currentIndex);
     showMainDivContent(project);
-    printTasksOnScreen(project,index);
+    printTasksOnScreen(project);
    };
    projectListDiv.appendChild(projectAsList);
   });
-  printTasksOnScreen(listOfProjects[getCurrentIndex()],getCurrentIndex())
+  printTasksOnScreen(listOfProjects[getCurrentIndex()])
  };
 
- const printTasksOnScreen = (project,index) => {
+ const printTasksOnScreen = (project) => {
   taskCardDiv.textContent = ""
   if(project.TASKLIST.length !== 0){
     project.TASKLIST.forEach((task,taskIndex) => {
     const card = document.createElement('div');
     card.dataset.index = taskIndex
-    card.dataset.projectIndex = index
+    card.dataset.project = project.title
     card.classList.add("taskCard");
 
 
