@@ -78,7 +78,7 @@ function InputController() {
     taskCardDiv.style.display = 'grid'
     editTask.onclick = () => {
       editDialog.showModal();
-      populateEditTaskModal(getCurrentIndex(),getCurrentTaskIndex());
+      populateEditTaskModal(listOfProjects,getCurrentIndex(),getCurrentTaskIndex());
       currentTaskIndex = editTask.dataset.index
       console.log("The current Task Index from edit:", currentTaskIndex)
     }
@@ -114,8 +114,12 @@ function InputController() {
  const showTaskModal = () => {
   taskDialog.showModal();
  };
- const populateEditTaskModal = (projectIndex,taskIndex) => {
-  const task = listOfProjects[projectIndex].TASKLIST[taskIndex];
+ const populateEditTaskModal = (projects,projectIndex,taskIndex) => {
+  const task = projects[projectIndex].TASKLIST[taskIndex];
+  if(!task) {
+    console.error(`No task found at index ${taskIndex} for project ${projectIndex}`);
+    return;
+  }
   document.querySelector('#editTaskName').value = task.name
   document.querySelector('#editDescription').value = task.description
   document.querySelectorAll('input[name="edit-priority"]').forEach(priority => {
