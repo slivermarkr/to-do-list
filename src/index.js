@@ -1,6 +1,6 @@
 import SetupController from './components/setup';
 import './styles/main.scss';
-import { format, parseISO } from 'date-fns';
+import { format, parseISO, parse } from 'date-fns';
 
 
 function InputController() {
@@ -124,12 +124,17 @@ function InputController() {
       return;
     }
   })
-  document.querySelector('#edit-deadline').value = task.deadline
+  const date = formatDateToInput(task.deadline);
+  document.querySelector('#edit-deadline').value = date;
  }
  const updateTime = () => {
   const now = new Date();
   document.querySelector('.currentDateTime').textContent = format(now, 'PPpp');
  };
+ function formatDateToInput(dateString) {
+  const parsedDate = parse(dateString, 'MMMM dd, yyyy', new Date())
+  return format(parsedDate, 'yyyy-MM-dd');
+ }
 
  const addProject = document.querySelector('#addProject');
  const titleDialog = document.querySelector('#titleDialog');
