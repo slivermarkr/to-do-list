@@ -120,6 +120,7 @@ function InputController() {
     console.error(`No task found at index ${taskIndex} for project ${projectIndex}`);
     return;
   }
+  document.querySelector('.editHeader').textContent = `Project: ${projects[projectIndex].title} `
   document.querySelector('#editTaskName').value = task.name
   document.querySelector('#editDescription').value = task.description
   document.querySelectorAll('input[name="edit-priority"]').forEach(priority => {
@@ -153,8 +154,29 @@ function InputController() {
  const cancelTaskDialog = document.querySelector('#cancelTaskDialog');
  const editDialog = document.querySelector('.editDialog');
  const editCancelTaskDialog = document.querySelector('.edit-btn-cancel');
+ const editSubmitTaskDialog = document.querySelector('.edit-btn-submit');
 
  // Project side of things
+ editSubmitTaskDialog.onclick  = () => {
+  listOfProjects[getCurrentIndex()].TASKLIST[getCurrentTaskIndex()].name = document.querySelector('#editTaskName').value
+  listOfProjects[getCurrentIndex()].TASKLIST[getCurrentTaskIndex()].description = document.querySelector('#editDescription').value
+
+  const priorityLevels = document.querySelectorAll('input[name="edit-priority"]');
+  priorityLevels.forEach(priorityLevel => {
+    if (priorityLevel.checked) {
+      listOfProjects[getCurrentIndex()].TASKLIST[getCurrentTaskIndex()].priorityLevel = priorityLevel.value;
+     return;
+    }
+   });
+   const dateInput = document.querySelector('input[name="edit-deadline"]').value;
+   
+   if(dateInput) {
+    const parseDate = parseISO(dateInput);
+    listOfProjects[getCurrentIndex()].TASKLIST[getCurrentTaskIndex()].deadline = format(parseDate, 'MMMM dd, yyyy');
+   }
+   showMainDivContent(listOfProjects[getCurrentIndex()]);
+   printProjectsOnScreen(listOfProjects[getCurrentIndex()],getCurrentIndex());
+ }
  addProject.onclick = () => {
   titleDialog.showModal();
  };
