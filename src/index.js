@@ -78,6 +78,7 @@ function InputController() {
     taskCardDiv.style.display = 'grid'
     editTask.onclick = () => {
       editDialog.showModal();
+      populateEditTaskModal(getCurrentIndex(),getCurrentTaskIndex());
       currentTaskIndex = editTask.dataset.index
       console.log("The current Task Index from edit:", currentTaskIndex)
     }
@@ -113,7 +114,18 @@ function InputController() {
  const showTaskModal = () => {
   taskDialog.showModal();
  };
-
+ const populateEditTaskModal = (projectIndex,taskIndex) => {
+  const task = listOfProjects[projectIndex].TASKLIST[taskIndex];
+  document.querySelector('#editTaskName').value = task.name
+  document.querySelector('#editDescription').value = task.description
+  document.querySelectorAll('input[name="edit-priority"]').forEach(priority => {
+    if(priority.value === task.priorityLevel){
+      priority.checked = true
+      return;
+    }
+  })
+  document.querySelector('#edit-deadline').value = task.deadline
+ }
  const updateTime = () => {
   const now = new Date();
   document.querySelector('.currentDateTime').textContent = format(now, 'PPpp');
