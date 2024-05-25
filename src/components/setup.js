@@ -2,6 +2,7 @@ import List from './classes.js'
 
 export default function SetupList() {
  const LIST = new List();
+ const saveToLocalStorage = () => LIST.saveToLocalStorage()
 
  const getListOfProject = () => LIST.PROJECTLIST;
 
@@ -45,5 +46,6 @@ export default function SetupList() {
   createProjectInstance,
   createTaskInstance,
   loadFromLocalStorage,
+  saveToLocalStorage
  };
 }

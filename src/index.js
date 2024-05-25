@@ -174,6 +174,7 @@ function InputController() {
     const parseDate = parseISO(dateInput);
     listOfProjects[getCurrentIndex()].TASKLIST[getCurrentTaskIndex()].deadline = format(parseDate, 'MMMM dd, yyyy');
    }
+   LIST.saveToLocalStorage()
    showMainDivContent(listOfProjects[getCurrentIndex()]);
    printProjectsOnScreen(listOfProjects[getCurrentIndex()],getCurrentIndex());
  }
