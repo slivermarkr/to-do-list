@@ -106,6 +106,18 @@ flex-direction: column;
 .priority-level label:nth-child(4) {
   color: skyblue;
 }
+.edit-priority-level label:first-child {
+  color: red;
+}
+.edit-priority-level label:nth-child(2) {
+  color: yellow;
+}
+.edit-priority-level label:nth-child(3) {
+  color: greenyellow;
+}
+.edit-priority-level label:nth-child(4) {
+  color: skyblue;
+}
 
 dialog {
   border: none;

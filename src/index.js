@@ -9,6 +9,8 @@ function InputController() {
  LIST.loadFromLocalStorage();
 
  let currentIndex = 0;
+ let currentTaskIndex = 0;
+ const getCurrentTaskIndex = () => currentTaskIndex;
  const getCurrentIndex = () => currentIndex;
 
  const defaultProject = () => listOfProjects[getCurrentIndex()];
@@ -65,18 +67,24 @@ function InputController() {
     taskBtnGrp.classList.add("task-btn-grp");
     const editTask =  document.createElement('button');
     editTask.classList.add('edit-task');
+    editTask.dataset.index = taskIndex;
     const deleteTask =  document.createElement('button');
     deleteTask.classList.add('delete-task');
+    deleteTask.dataset.index = taskIndex;
     taskBtnGrp.appendChild(editTask);
     taskBtnGrp.appendChild(deleteTask);
     card.appendChild(taskBtnGrp);
     taskCardDiv.appendChild(card);
     taskCardDiv.style.display = 'grid'
     editTask.onclick = () => {
-      console.log("Hello it edit task")
+      editDialog.showModal();
+      currentTaskIndex = editTask.dataset.index
+      console.log("The current Task Index from edit:", currentTaskIndex)
     }
     deleteTask.onclick = () => {
       console.log("Hello it delete task")
+      currentTaskIndex = deleteTask.dataset.index
+      console.log("The current Task Index from delete:", currentTaskIndex)
     }
   })
 } else {
@@ -122,7 +130,8 @@ function InputController() {
  const taskCardDiv = document.querySelector('.taskCardDiv');
  const taskDialog = document.querySelector('.taskDialog');
  const cancelTaskDialog = document.querySelector('#cancelTaskDialog');
- const btnSubmitTask = document.querySelector('.btn-submit');
+ const editDialog = document.querySelector('.editDialog');
+ const editCancelTaskDialog = document.querySelector('.edit-btn-cancel');
 
  // Project side of things
  addProject.onclick = () => {
@@ -158,6 +167,10 @@ function InputController() {
  cancelTaskDialog.addEventListener('click', (e) => {
   e.preventDefault();
   taskDialog.close();
+ });
+ editCancelTaskDialog.addEventListener('click', (e) => {
+  e.preventDefault();
+  editDialog.close();
  });
 
  taskDialog.addEventListener('close', (e) => {
