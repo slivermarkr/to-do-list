@@ -78,8 +78,8 @@ function InputController() {
     taskCardDiv.style.display = 'grid'
     editTask.onclick = () => {
       editDialog.showModal();
-      populateEditTaskModal(listOfProjects,getCurrentIndex(),getCurrentTaskIndex());
       currentTaskIndex = editTask.dataset.index
+      populateEditTaskModal(listOfProjects,getCurrentIndex(),getCurrentTaskIndex());
       console.log("The current Task Index from edit:", currentTaskIndex)
     }
     deleteTask.onclick = () => {
@@ -174,9 +174,11 @@ function InputController() {
     const parseDate = parseISO(dateInput);
     listOfProjects[getCurrentIndex()].TASKLIST[getCurrentTaskIndex()].deadline = format(parseDate, 'MMMM dd, yyyy');
    }
-   LIST.saveToLocalStorage()
+   LIST.saveToLocalStorage();
+
    showMainDivContent(listOfProjects[getCurrentIndex()]);
    printProjectsOnScreen(listOfProjects[getCurrentIndex()],getCurrentIndex());
+   
  }
  addProject.onclick = () => {
   titleDialog.showModal();
