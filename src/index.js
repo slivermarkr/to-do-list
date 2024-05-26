@@ -46,8 +46,11 @@ function InputController() {
    projectListDiv.appendChild(projectAsList);
    projectAsList.addEventListener('dblclick', (e) => {
     e.preventDefault();
+    const para = document.querySelector('.deleteProjectForm p')
+    para.textContent = ""
     console.log(`Project${project.title}Index:${index}`);
     deleteProjectDialog.showModal();
+    para.textContent = `Are you sure you want to delete "${project.title}" from project?`
    })
   });
   printTasksOnScreen(listOfProjects[getCurrentIndex()])
@@ -93,7 +96,10 @@ function InputController() {
       console.log("Hello it delete task")
       currentTaskIndex = deleteTask.dataset.index
       console.log("The current Task Index from delete:", currentTaskIndex)
+      const para = document.querySelector(".deletePrjForm p")
+      para.textContent = ""
       deleteDialog.showModal(); 
+      para.textContent = `Are you sure you want to delete "${task.name}" from Project: "${project.title}"? `
     }
   })
 } else {
