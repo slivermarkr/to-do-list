@@ -86,6 +86,7 @@ function InputController() {
       console.log("Hello it delete task")
       currentTaskIndex = deleteTask.dataset.index
       console.log("The current Task Index from delete:", currentTaskIndex)
+      deleteDialog.showModal(); 
     }
   })
 } else {
@@ -155,6 +156,9 @@ function InputController() {
  const editDialog = document.querySelector('.editDialog');
  const editCancelTaskDialog = document.querySelector('.edit-btn-cancel');
  const editSubmitTaskDialog = document.querySelector('.edit-btn-submit');
+ const deleteDialog = document.querySelector('#deleteDialog');
+ const deleteTaskNo = document.querySelector('.prj-delete-no');
+ const deleteTaskYes = document.querySelector('.prj-delete-yes');
 
  // Project side of things
  editSubmitTaskDialog.onclick  = () => {
@@ -248,7 +252,29 @@ function InputController() {
   }
   printProjectsOnScreen(listOfProjects[getCurrentIndex()],getCurrentIndex());
  });
-
+ deleteDialog.addEventListener('close' , (e) => {
+  e.preventDefault();
+ })
+ deleteTaskNo.addEventListener('click' , (e) => {
+  e.preventDefault();
+  console.log('"No" button is clicked detetTaskModal closing');
+  console.log('Currrent project index:', getCurrentIndex())
+  console.log('Currrent task index:', getCurrentTaskIndex())
+  deleteDialog.close();
+ })
+ deleteTaskYes.addEventListener('click', (e) => {
+  e.preventDefault();
+  console.log(`Deleting Task: '${listOfProjects[getCurrentIndex()].TASKLIST[getCurrentTaskIndex()].name}' in Project: '${listOfProjects[getCurrentIndex()].title};' `);
+  const project = listOfProjects[getCurrentIndex()].TASKLIST;
+  if(project){
+    console.log(project);
+    project.splice(getCurrentTaskIndex(),1);
+    LIST.saveToLocalStorage()
+    printProjectsOnScreen()
+    printTasksOnScreen(listOfProjects[getCurrentIndex()])
+  }
+  deleteDialog.close();
+ })
  createDefaultProject();
  showMainDivContent(defaultProject());
  printProjectsOnScreen();

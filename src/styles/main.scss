@@ -170,24 +170,33 @@ dialog button:hover {
   background: rgb(212, 160, 224);
   color: #616060;
 }
-.btn-submit {
+.edit-btn-submit,.btn-submit {
   background: rgb(236, 194, 247);
   color: white;
 }
+.edit-btn-submit:hover,
 .btn-submit:hover {
   background: rgb(214, 149, 233);
   color: #616060;
 }
+.edit-btn-cancel,
 .btn-cancel {
   background: rgb(247, 194, 208);
   color: white;
   margin-left: 10px;
 }
+.edit-btn-cancel:hover,
 .btn-cancel:hover {
   background: rgb(234, 158, 178);
   color: #616060;
 }
 .button-group {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+  gap: 10px;
+}
+.edit-button-group {
   display: flex;
   justify-content: flex-start;
   flex-direction: row-reverse;
