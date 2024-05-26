@@ -42,13 +42,20 @@ function InputController() {
     showMainDivContent(project);
     printTasksOnScreen(project);
    };
+
    projectListDiv.appendChild(projectAsList);
+   projectAsList.addEventListener('dblclick', (e) => {
+    e.preventDefault();
+    console.log(`Project${project.title}Index:${index}`);
+    deleteProjectDialog.showModal();
+   })
   });
   printTasksOnScreen(listOfProjects[getCurrentIndex()])
  };
 
  const printTasksOnScreen = (project) => {
   taskCardDiv.textContent = ""
+  titleDiv.textContent = project.title;
   if(project.TASKLIST.length !== 0){
     project.TASKLIST.forEach((task,taskIndex) => {
     const card = document.createElement('div');
@@ -159,7 +166,10 @@ function InputController() {
  const deleteDialog = document.querySelector('#deleteDialog');
  const deleteTaskNo = document.querySelector('.prj-delete-no');
  const deleteTaskYes = document.querySelector('.prj-delete-yes');
-
+ const deleteProjectDialog = document.querySelector('#deleteProjectDialog');
+ const deleteProjectNo = document.querySelector('.project-delete-no');
+ const deleteProjectYes = document.querySelector('.project-delete-yes');
+ 
  // Project side of things
  editSubmitTaskDialog.onclick  = () => {
   listOfProjects[getCurrentIndex()].TASKLIST[getCurrentTaskIndex()].name = document.querySelector('#editTaskName').value
@@ -274,6 +284,20 @@ function InputController() {
     printTasksOnScreen(listOfProjects[getCurrentIndex()])
   }
   deleteDialog.close();
+ })
+ deleteProjectNo.addEventListener('click' , (e) => {
+  e.preventDefault();
+  deleteProjectDialog.close();
+ })
+ deleteProjectYes.addEventListener('click' , (e) => {
+  e.preventDefault();
+  console.log(`Deleting Project: ${listOfProjects[getCurrentIndex()].title} at index: ${getCurrentIndex()}`);
+  listOfProjects.splice(getCurrentIndex(),1);
+  LIST.saveToLocalStorage();
+  currentIndex = 0
+  printProjectsOnScreen();
+  printTasksOnScreen(listOfProjects[currentIndex]);
+  deleteProjectDialog.close();
  })
  createDefaultProject();
  showMainDivContent(defaultProject());
