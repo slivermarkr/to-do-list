@@ -1,6 +1,6 @@
 import SetupController from './components/setup';
 import './styles/main.scss';
-import { format, parseISO, parse } from 'date-fns';
+import { format, parseISO, parse, formatDistance, differenceInDays} from 'date-fns';
 
 
 function InputController() {
@@ -23,8 +23,9 @@ function InputController() {
   const projectInStrings = localStorage.getItem('projects');
   if (!projectInStrings) {
     LIST.createProjectInstance('Today');
-    LIST.createProjectInstance('Home');
-    LIST.createProjectInstance('Work');
+    LIST.createProjectInstance('This Week');
+    LIST.createProjectInstance('This Month');
+    LIST.createProjectInstance('Sampe Project');
   }
  };
 
@@ -118,15 +119,20 @@ function InputController() {
     addTaskButton.classList.add('addTaskBtn');
     taskDiv.appendChild(addTaskButton);
     addTaskButton.onclick = () => {
-     showTaskModal();
+     showTaskModal(project.title === "Today");
     };
   } else {
     console.error('Project is undefined:', project);
   }
  };
 
- const showTaskModal = () => {
+ const showTaskModal = (isTodayProject = false) => {
   taskDialog.showModal();
+  if(isTodayProject) {
+    const dateInput = document.querySelector('input[name="deadline"]');
+    const today = new Date();
+    dateInput.value = format(today, 'yyyy-MM-dd');
+  }
  };
  const populateEditTaskModal = (projects,projectIndex,taskIndex) => {
   const task = projects[projectIndex].TASKLIST[taskIndex];
@@ -155,6 +161,43 @@ function InputController() {
   return format(parsedDate, 'yyyy-MM-dd');
  }
 
+const lookForDeadline = () => {
+  const todayProjectIndex = listOfProjects.findIndex(project => project.title === "Today");
+  if(todayProjectIndex === -1) {
+    console.error("Today project not found.");
+    return;
+  }
+  const todayProject = listOfProjects[todayProjectIndex];
+  todayProject.TASKLIST = [];
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  listOfProjects.forEach(project => {
+    project.TASKLIST.forEach(task => {
+      const taskDeadline = parse(task.deadline, 'MMMM dd, yyyy', new Date());
+      taskDeadline.setHours(0, 0, 0, 0);
+
+      if(isSameDay(today, taskDeadline)) {
+        todayProject.TASKLIST.push({
+          name: task.name,
+          description: task.description,
+          priorityLevel: task.priorityLevel,
+          deadline: task.deadline
+        })
+      }
+    })
+  })
+  LIST.saveToLocalStorage()
+  printProjectsOnScreen();
+  printTasksOnScreen(todayProject);
+
+}
+
+ const isSameDay = (date1, date2) => {
+  return date1.getFullYear() === date2.getFullYear() &&
+         date1.getMonth() === date2.getMonth() &&
+         date1.getDate() === date2.getDate()
+ }
  const addProject = document.querySelector('#addProject');
  const titleDialog = document.querySelector('#titleDialog');
  const title = document.querySelector('#title');
@@ -267,6 +310,7 @@ function InputController() {
    showMainDivContent(listOfProjects[getCurrentIndex()]);
   }
   printProjectsOnScreen(listOfProjects[getCurrentIndex()],getCurrentIndex());
+  lookForDeadline()
  });
  deleteDialog.addEventListener('close' , (e) => {
   e.preventDefault();
@@ -288,6 +332,7 @@ function InputController() {
     LIST.saveToLocalStorage()
     printProjectsOnScreen()
     printTasksOnScreen(listOfProjects[getCurrentIndex()])
+    lookForDeadline();
   }
   deleteDialog.close();
  })
@@ -310,6 +355,7 @@ function InputController() {
  printProjectsOnScreen();
  setInterval(updateTime, 1000);
  updateTime();
+ lookForDeadline()
 
 }
 const me = InputController();
