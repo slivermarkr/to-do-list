@@ -1,115 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= htmlWebpackPlugin.options.title%></title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-</head>
-<body>
-    <dialog id="titleDialog">
-        <form action="" class="titleForm">
-            <p>
-                <label for="title">Project Title:<input id="title" type="text" placeholder="Project Title"></label>
-            </p>
-            <div>
-                <button formmethod="dialog" id="cancelTitle" value="Project">Cancel</button>
-                <button formmethod="dialog" id="confirmTitle" value="Project">Okay</button>
-            </div>
-        </form>
-    </dialog>
-    <!-- delete a project dialog -->
-    <dialog id="deleteDialog">
-        <form action="" class="deletePrjForm">
-            <p></p>
-            <button class="prj-delete-yes" value="yes">Yes</button>
-            <button class="prj-delete-no" value="no">No</button>
-        </form>
-    </dialog>
-    <!-- delete project -->
-    <dialog id="deleteProjectDialog">
-        <form action="" class="deleteProjectForm">
-            <p></p>
-            <button class="project-delete-yes" value="yes">Yes</button>
-            <button class="project-delete-no" value="no">No</button>
-        </form>
-    </dialog>
-    <!-- dialog for task -->
-    <dialog class="taskDialog">
-        <form method="dialog">
-          <h2>Add New Task</h2>
-          <label for="taskName">Task Name</label>
-          <input type="text" id="taskName" name="taskName" required>
-          
-          <label for="description">Description</label>
-          <textarea id="description" name="description" rows="4" required></textarea>
-          
-          <label>Priority Level</label>
-          <div class="priority-level">
-            <label title="Urgent"><input  type="radio" name="priority" value="Urgent" required> #</label>
-            <label title="High"><input type="radio" name="priority" value="high"> #</label>
-            <label title="Medium"><input type="radio" name="priority" value="medium"> #</label>
-            <label title="Low"><input type="radio" name="priority" value="low"> #</label>
-          </div>
-          
-          <label for="deadline">Deadline</label>
-          <input type="date" id="deadline" name="deadline" required>
-          
-          <div class="button-group">
-            <button class="btn-submit" type="submit">Add Task</button>
-            <button class="btn-cancel" type="button" id="cancelTaskDialog">Cancel</button>
-          </div>
-        </form>
-    </dialog>
-    <!-- edit task dialog -->
-    <dialog class="editDialog">
-        <form method="dialog">
-          <h2 class="editHeader">Add New Task</h2>
-          <label for="editTaskName">Task Name</label>
-          <input type="text" id="editTaskName" name="editTaskName" required>
-          
-          <label for="editDescription">Description</label>
-          <textarea id="editDescription" name="editDescription" rows="4" required></textarea>
-          
-          <label>Priority Level</label>
-          <div class="edit-priority-level">
-            <label title="Urgent"><input  type="radio" name="edit-priority" value="Urgent" required> #</label>
-            <label title="High"><input type="radio" name="edit-priority" value="high"> #</label>
-            <label title="Medium"><input type="radio" name="edit-priority" value="medium"> #</label>
-            <label title="Low"><input type="radio" name="edit-priority" value="low"> #</label>
-          </div>
-          
-          <label for="edit-deadline">Deadline</label>
-          <input type="date" id="edit-deadline" name="edit-deadline" required>
-          
-          <div class="edit-button-group">
-            <button class="edit-btn-submit" type="submit">Edit Task</button>
-            <button class="edit-btn-cancel" type="button" id="editCancelTaskDialog">Cancel</button>
-          </div>
-        </form>
-    </dialog>
-    <div class="header-cont">
-        <header><h1><a title="Go to my to-do list repo" href="https://github.com/slivermarkr/to-do-list">Todo List App</a></h1></header>
-        <div class="currentDateTime">Example date</div>
-    </div>
-    <div class="content-wrapper">
-        <div class="sidebar-cont">
-            <h2>Todos</h2>
-            <button id="addProject">Add Project</button>
-            <div class="projectsListDiv">
-                <ul class="project-list">
-                    <li>Hello</li>
-                </ul>
-            </div>
-        </div>
-        <div class="right-cont">
-            <div class="upperMain">
-                <div class="titleDiv"><h2>Title goes here</h2></div>
-            </div>
-            <main class="taskDiv">
-                <div class="taskCardDiv"></div>
-            </main>
-        </div>
-    </div>
-</body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body></body>
 </html>
